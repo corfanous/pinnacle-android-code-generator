@@ -1,0 +1,8 @@
+build/
+yamlFiles/
+.idea/
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+PinnacleAndroidCodeGenerator.iml

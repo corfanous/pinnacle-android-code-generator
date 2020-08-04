@@ -1,0 +1,38 @@
+apply plugin: 'java'
+
+group 'org.pinnacleframework.codegenerator.android.cli'
+version '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+jar {
+    manifest{
+        attributes 'Main-Class': 'org.pinnacleframework.codegenerator.android.cli.AndroidCodeGeneratorCli'
+    }
+    from {
+        configurations.libs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+configurations {
+    libs
+}
+
+repositories {
+    maven { url "https://repo.spring.io/libs-release" }
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.beryx:text-io:3.4.1'
+    implementation 'org.freemarker:freemarker:2.3.28'
+    implementation 'org.yaml:snakeyaml:1.23'
+    libs group: 'org.freemarker', name: 'freemarker', version: '2.3.28'
+    libs group: 'org.beryx', name: 'text-io', version: '3.4.1'
+    libs group: 'org.yaml', name: 'snakeyaml', version: '1.23'
+    configurations.compile.extendsFrom(configurations.libs)
+}
