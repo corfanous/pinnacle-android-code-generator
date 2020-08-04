@@ -41,7 +41,7 @@ public class ${classSpecification.name}ListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater
-                .inflate(R.layout.fragment_list_<@toUnderScore camelCase="${classSpecification.name}"/>, container, false);
+                .inflate(R.layout.fragment_list_${classSpecification.tableName}", container, false);
         //
         setHasOptionsMenu(true);//enable toolbar menu
         //
@@ -94,7 +94,7 @@ public class ${classSpecification.name}ListFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_list_<@toUnderScore camelCase="${classSpecification.name}"/>,menu);
+        inflater.inflate(R.menu.menu_list_${classSpecification.tableName}",menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 }

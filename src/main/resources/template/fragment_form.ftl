@@ -42,7 +42,7 @@ public class ${classSpecification.name}FormFragment extends Fragment {
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_${classSpecification.tableName}_form,
+        View view=inflater.inflate(R.layout.fragment_form_${classSpecification.tableName},
                 container,false);
         <#list classSpecification.fields as field>
         <#if field.name != "id">

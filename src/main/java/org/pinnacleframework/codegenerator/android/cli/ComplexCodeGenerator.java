@@ -51,12 +51,45 @@ public class ComplexCodeGenerator {
             generateListFragmentFile(spec);
             generateRecyclerAdapterFile(spec);
             //generateListFragmentTestFile(spec);
-            //generateListFragmentLayoutFile(spec);
+            generateListFragmentLayoutFile(spec);
+            generateListFragmentContentFile(spec);
             //Form Fragment file
             generateFormFragmentFile(spec);
             //generateFormFragmentTestFile(spec);
-            //generateFormFragmentLayoutFile(spec);
+            generateFormFragmentLayoutFile(spec);
         }
+    }
+
+    private void generateFormFragmentLayoutFile(ComplexClassSpecification spec) throws IOException {
+        Map<String, Object> model = new HashMap<>();
+        Template template = cfg.getTemplate("template/fragment_form_layout.ftl");
+        model.put("classSpecification", spec);
+        //String folder = "src/main/res/layout";
+        String folder = createFileFolder("src/main/res", "layout");
+        File layoutSourceFile = new File(folder, "fragment_form_"+spec.getTableName() + ".xml");
+        //
+        process(template, model, layoutSourceFile);
+    }
+
+    private void generateListFragmentContentFile(ComplexClassSpecification spec) throws IOException {
+        Map<String, Object> model = new HashMap<>();
+        Template template = cfg.getTemplate("template/content_list_layout.ftl");
+        model.put("classSpecification", spec);
+        //String folder = "src/main/res/layout";
+        String folder = createFileFolder("src/main/res", "layout");
+        File layoutSourceFile = new File(folder, "content_list_"+spec.getTableName() + ".xml");
+        //
+        process(template, model, layoutSourceFile);
+    }
+    private void generateListFragmentLayoutFile(ComplexClassSpecification spec) throws IOException {
+        Map<String, Object> model = new HashMap<>();
+        Template template = cfg.getTemplate("template/fragment_list_layout.ftl");
+        model.put("classSpecification", spec);
+        //String folder = "src/main/res/layout";
+        String folder = createFileFolder("src/main/res", "layout");
+        File layoutSourceFile = new File(folder, "fragment_list_"+spec.getTableName() + ".xml");
+        //
+        process(template, model, layoutSourceFile);
     }
 
     private void generateActivityLayoutFile(ComplexClassSpecification spec) throws IOException {
