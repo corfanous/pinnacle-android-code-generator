@@ -44,7 +44,6 @@ public class ComplexClassSpecification {
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
-
     public List<FieldSpecification> getFields() {
         return Collections.unmodifiableList(fields);
     }
@@ -57,6 +56,13 @@ public class ComplexClassSpecification {
     public void setImports(List<String> imports) {
         this.imports = imports;
     }
+    public String getBasePackageName() {
+        return basePackageName;
+    }
+    public void setBasePackageName(String basePackageName) {
+        this.basePackageName = basePackageName;
+    }
+
     public String getPackageName() {
         return packageName;
     }
