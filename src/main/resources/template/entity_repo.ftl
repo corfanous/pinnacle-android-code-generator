@@ -18,7 +18,7 @@ public class ${classSpecification.name}Repo {
     }
     public void saveBlocked(${classSpecification.name} ${classSpecification.name?uncap_first}){
         //
-        if(${classSpecification.name?uncap_first} instanceof PatientMedicalTest){
+        if(${classSpecification.name?uncap_first} instanceof ${classSpecification.name}){
             if(${classSpecification.name?uncap_first}.getId()>0){
                 m${classSpecification.name}Dao.update(${classSpecification.name?uncap_first});
             }else{
