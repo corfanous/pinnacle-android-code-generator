@@ -1,5 +1,6 @@
 package org.pinnacleframework.codegenerator.android.cli;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,11 @@ public class ComplexClassSpecification {
                 .replaceAll("([a-z])([A-Z]+)", "$1_$2")
                 .toLowerCase();
         this.fields=fields;
-        this.imports=imports;
+        if(imports instanceof ArrayList){
+            this.imports=imports;
+        }else{
+            this.imports=new ArrayList<>();
+        }
         this.basePackageName=basePackageName;
         this.packageName=packageName;
     }

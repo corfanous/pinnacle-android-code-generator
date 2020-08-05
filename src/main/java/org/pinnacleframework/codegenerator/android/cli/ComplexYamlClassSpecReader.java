@@ -35,8 +35,13 @@ public class ComplexYamlClassSpecReader {
                 fieldParams.entrySet().stream()
                   .map(o -> new FieldSpecification(o.getKey(), o.getValue().toString()))
                    .collect(Collectors.toList());
-        List<String> imports=
-                new ArrayList<>((Collection<? extends String>) e.getValue().get("imports"));
+        List<String> imports=null;
+        try{
+            imports=
+                    new ArrayList<>((Collection<? extends String>) e.getValue().get("imports"));
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
         return new ComplexClassSpecification(e.getKey(),fields, imports,
                                                  e.getValue().get("basePackageName").toString(),
                                                             e.getValue().get("packageName").toString());
