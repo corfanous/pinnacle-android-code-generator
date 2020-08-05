@@ -57,7 +57,20 @@ public class ComplexCodeGenerator {
             generateFormFragmentFile(spec);
             //generateFormFragmentTestFile(spec);
             generateFormFragmentLayoutFile(spec);
+            //menu
+            generateMenuFile(spec);
         }
+    }
+
+    private void generateMenuFile(ComplexClassSpecification spec) throws IOException {
+        Map<String, Object> model = new HashMap<>();
+        Template template = cfg.getTemplate("template/menu_layout.ftl");
+        model.put("classSpecification", spec);
+        //String folder = "src/main/res/layout";
+        String folder = createFileFolder("src/main/res", "menu");
+        File layoutSourceFile = new File(folder, "menu_list_"+spec.getTableName() + ".xml");
+        //
+        process(template, model, layoutSourceFile);
     }
 
     private void generateFormFragmentLayoutFile(ComplexClassSpecification spec) throws IOException {
