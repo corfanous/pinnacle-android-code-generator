@@ -10,4 +10,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="${classSpecification.packageName}.${classSpecification.name}ListFragment"
-    tools:listitem="@layout/content_list_${classSpecification.packageName}"/>
+    tools:listitem="@layout/content_list_${classSpecification.tableName}"/>
