@@ -86,7 +86,7 @@ public class ${classSpecification.name}ListFragment extends Fragment {
             @Override
             public void onChanged(List<${classSpecification.name}> ${classSpecification.name?uncap_first}s) {
                 if(${classSpecification.name?uncap_first}s instanceof List){
-                    adapter.set${classSpecification.name}s(null,${classSpecification.name?uncap_first}s);
+                    adapter.set${classSpecification.name}s(${classSpecification.name?uncap_first}s);
                 }
             }
         });
