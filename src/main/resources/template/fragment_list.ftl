@@ -41,7 +41,7 @@ public class ${classSpecification.name}ListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater
-                .inflate(R.layout.fragment_list_${classSpecification.tableName}", container, false);
+                .inflate(R.layout.fragment_list_${classSpecification.tableName}, container, false);
         //
         setHasOptionsMenu(true);//enable toolbar menu
         //
