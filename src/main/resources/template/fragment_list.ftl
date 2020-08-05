@@ -94,7 +94,7 @@ public class ${classSpecification.name}ListFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_list_${classSpecification.tableName}",menu);
+        inflater.inflate(R.menu.menu_list_${classSpecification.tableName},menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 }
