@@ -71,7 +71,7 @@ public class ${classSpecification.name}FormFragment extends Fragment {
                 ${classSpecification.name} ${classSpecification.name?uncap_first}=new ${classSpecification.name}();
                 <#list classSpecification.fields as field>
                 <#if field.name != "id">
-                set${field.name?cap_first}(${field.name?lower_case});
+                ${classSpecification.name?uncap_first}.set${field.name?cap_first}(${field.name?lower_case});
                 </#if>
                 </#list>
                 m${classSpecification.name}VM.save(${classSpecification.name?uncap_first});
