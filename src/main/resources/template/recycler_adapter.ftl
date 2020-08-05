@@ -38,7 +38,6 @@ public class ${classSpecification.name}RecyclerViewAdapter extends RecyclerView.
             return holder;
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
             if(holder instanceof  ItemViewHolder){
