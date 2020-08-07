@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ${classSpecification.basePackageName}.R;
+import ${classSpecification.basePackageName}.util.Config;
 import ${classSpecification.basePackageName}.util.ClickListener;
 import ${classSpecification.basePackageName}.util.RecyclerTouchListener;
 
@@ -49,14 +50,6 @@ public class ${classSpecification.name}ListFragment extends Fragment {
         if(root instanceof RecyclerView){
             RecyclerView rcv=(RecyclerView) root;
             adapter=new ${classSpecification.name}RecyclerViewAdapter(context);
-            //
-            adapter.setNewButtonClickListener(view -> {
-                Intent i=new Intent(context, ${classSpecification.name}Activity.class);
-                //i.putExtra("patientId",getArguments().getLong("patientId"));
-                //i.putExtra("caseId",getArguments().getLong("caseId"));
-                startActivity(i);
-                //startActivityForResult(i,1);
-            });
             rcv.setLayoutManager(new LinearLayoutManager(context));
             rcv.setAdapter(adapter);
             rcv.addOnItemTouchListener(new RecyclerTouchListener(getContext(), rcv, new ClickListener(){
@@ -65,7 +58,10 @@ public class ${classSpecification.name}ListFragment extends Fragment {
                 }
                 @Override
                 public void onLongClick(View view, int position) {
-                    //navigate to edit form(${classSpecification.name}Activity#${classSpecification.name}FormFragment)
+                    Intent i=new Intent(context, ${classSpecification.name}.class);
+                    i.putExtra("id",adapter.getItem(position).getId());
+                    i.putExtra(Config.VIEW_MODE,Config.VIEW_FORM);
+                    startActivity(i);
                 }
             }));
         }
