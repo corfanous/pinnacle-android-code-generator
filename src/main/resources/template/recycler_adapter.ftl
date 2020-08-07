@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ${classSpecification.basePackageName}.R;
-import ${classSpecification.basePackageName}.util.OnNewButtonClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,6 @@ public class ${classSpecification.name}RecyclerViewAdapter extends RecyclerView.
 
         private List<${classSpecification.name}> list;
         private final LayoutInflater mInflater;
-        private OnNewButtonClickListener newButtonClickListener;
 
         public ${classSpecification.name}RecyclerViewAdapter(@NonNull Context context){
             mInflater=LayoutInflater.from(context);
@@ -60,9 +58,6 @@ public class ${classSpecification.name}RecyclerViewAdapter extends RecyclerView.
                 list.clear();
             list=${classSpecification.name?uncap_first}s;
             notifyDataSetChanged();
-        }
-        public void setNewButtonClickListener(OnNewButtonClickListener newButtonClickListener){
-            this.newButtonClickListener=newButtonClickListener;
         }
 
         public class ItemViewHolder extends RecyclerView.ViewHolder{
