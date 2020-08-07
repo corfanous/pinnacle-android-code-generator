@@ -20,12 +20,12 @@ import java.util.List;
 
 public class ${classSpecification.name}RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-        private List<${classSpecification.name}> list;
+        private List<${classSpecification.name}> items;
         private final LayoutInflater mInflater;
 
         public ${classSpecification.name}RecyclerViewAdapter(@NonNull Context context){
             mInflater=LayoutInflater.from(context);
-            list=new ArrayList<>();
+            items=new ArrayList<>();
         }
         @NonNull
         @Override
@@ -42,21 +42,21 @@ public class ${classSpecification.name}RecyclerViewAdapter extends RecyclerView.
                 ItemViewHolder item=(ItemViewHolder) holder;
                 <#list classSpecification.fields as field>
                 <#if field.name != "id">
-                item.txt${field.name?cap_first}.setText(list.get(position).get${field.name?cap_first}());
+                item.txt${field.name?cap_first}.setText(items.get(position).get${field.name?cap_first}());
                 </#if>
                 </#list>
-                //item.txtDate.setText(list.get(position).getRequestedDate().format(DateTimeFormatter.ofPattern(Config.DEFAULT_DATE_FORMAT)));
+                //item.txtDate.setText(items.get(position).getRequestedDate().format(DateTimeFormatter.ofPattern(Config.DEFAULT_DATE_FORMAT)));
             }
         }
         @Override
         public int getItemCount() {
-            if(list!=null) return list.size();
+            if(items!=null) return items.size();
             return 0;
         }
         public void set${classSpecification.name}s(List<${classSpecification.name}> ${classSpecification.name?uncap_first}s){
-            if(list instanceof List)
-                list.clear();
-            list=${classSpecification.name?uncap_first}s;
+            if(items instanceof List)
+                items.clear();
+            items=${classSpecification.name?uncap_first}s;
             notifyDataSetChanged();
         }
 
