@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="${classSpecification.packageName}.${classSpecification.name}Activity">
     <item
-        android:id="@+id/new"
-        android:icon="@drawable/ic_new_content_v_24dp"
-        android:title="@string/add"
-        android:checkable="true"
+        android:id="@+id/search_${classSpecification.tableName}"
+        android:title="@string/search"
+        android:icon="@drawable/ic_launcher_background"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom"
-        android:onClick="onClickNew${classSpecification.name}"/>
+        app:showAsAction="always"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 </menu>
