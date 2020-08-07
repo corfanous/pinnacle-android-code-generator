@@ -53,6 +53,25 @@ public class ${classSpecification.name}RecyclerViewAdapter extends RecyclerView.
             if(items!=null) return items.size();
             return 0;
         }
+
+        public ${classSpecification.name} getItem(int position){
+            if(items instanceof List)
+                return items.get(position);
+            else
+                return null;
+        }
+        public List<${classSpecification.name}> getItems(){
+            return items;
+        }
+        public void setItem(${classSpecification.name} ${classSpecification.name?uncap_first}){
+            if(items instanceof List)
+                items.add(${classSpecification.name?uncap_first});
+            else{
+                items =new ArrayList<>();
+                items.add(${classSpecification.name?uncap_first});
+            }
+            notifyDataSetChanged();
+        }
         public void setItems(List<${classSpecification.name}> ${classSpecification.name?uncap_first}s){
             if(items instanceof List)
                 items.clear();
