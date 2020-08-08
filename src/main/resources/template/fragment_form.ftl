@@ -8,24 +8,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.Spinner;
+import com.google.android.material.textfield.TextInputEditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.textfield.TextInputEditText;
 import ${classSpecification.basePackageName}.R;
 
 public class ${classSpecification.name}FormFragment extends Fragment {
 
-    <#list classSpecification.fields as field>
-    <#if field.name != "id">
+<#list classSpecification.fields as field>
+<#if field.name != "id">
+<#if field.type =="boolean">
+    private RadioButton rb${field.name?cap_first};
+    private RadioButton rbNot${field.name?cap_first};
+<#elseif field.type =="List">
+    # setup checkbox and spinner
+    //private CheckBox cb${field.name?cap_first}1;
+    //private CheckBox cb${field.name?cap_first}2;
+    private Spinner sp${field.name?cap_first}
+<#else>
     private TextInputEditText txt${field.name?cap_first};
-    </#if>
-    </#list>
+</#if>
+</#if>
+</#list>
+    //
     private ${classSpecification.name}ViewModel m${classSpecification.name}VM;
-
+    //
     public ${classSpecification.name}FormFragment(){
         /*Bundle args=new Bundle();
         args.putLong("patientId", CaseProvider.currentPatientId);
