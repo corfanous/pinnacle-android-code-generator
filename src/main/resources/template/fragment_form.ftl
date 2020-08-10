@@ -38,6 +38,7 @@ public class ${classSpecification.name}FormFragment extends Fragment {
 </#if>
 </#list>
     //
+    private ${classSpecification.name} ${classSpecification.name?uncap_first};
     private ${classSpecification.name}ViewModel m${classSpecification.name}VM;
     //
     public ${classSpecification.name}FormFragment(){
