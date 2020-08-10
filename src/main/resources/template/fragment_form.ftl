@@ -61,7 +61,28 @@ public class ${classSpecification.name}FormFragment extends Fragment {
                 container,false);
         <#list classSpecification.fields as field>
         <#if field.name != "id">
+        <#if field.type =="boolean">
+        rb${field.name?cap_first}=view.findViewById(R.id.<@toUnderScore camelCase="${field.name}"/>);
+        rb${field.name?cap_first}.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    ${classSpecification.name?uncap_first}.setPrescribed(${classSpecification.name}.PRESCRIBED);
+            }
+        });
+        rbNot${field.name?cap_first}=view.findViewById(R.id.not_<@toUnderScore camelCase="${field.name}"/>);
+        rbNot${field.name?cap_first}.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    ${classSpecification.name?uncap_first}.setPrescribed(${classSpecification.name}.NOT_PRESCRIBED);
+            }
+        });
+        <#elseif field.type="List">
+        //
+        <#else>
         txt${field.name?cap_first}=(TextInputEditText) view.findViewById(R.id.<@toUnderScore camelCase="${field.name}"/>);
+        </#if>
         </#if>
         </#list>
         //setup cancel button
