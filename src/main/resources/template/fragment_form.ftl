@@ -28,10 +28,11 @@ public class ${classSpecification.name}FormFragment extends Fragment {
     private RadioButton rb${field.name?cap_first};
     private RadioButton rbNot${field.name?cap_first};
 <#elseif field.type =="List">
-    # setup checkbox and spinner
+    //setup checkbox or spinner
     //private CheckBox cb${field.name?cap_first}1;
     //private CheckBox cb${field.name?cap_first}2;
-    private Spinner sp${field.name?cap_first}
+    private Spinner sp${field.name?cap_first};
+    private ArrayAdapter<String> adapter${field.name?cap_first};
 <#else>
     private TextInputEditText txt${field.name?cap_first};
 </#if>
@@ -67,7 +68,7 @@ public class ${classSpecification.name}FormFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
-                    ${classSpecification.name?uncap_first}.setPrescribed(${classSpecification.name}.PRESCRIBED);
+                    ${classSpecification.name?uncap_first}.set${field.name?cap_first}(${classSpecification.name}.PRESCRIBED);
             }
         });
         rbNot${field.name?cap_first}=view.findViewById(R.id.not_<@toUnderScore camelCase="${field.name}"/>);
@@ -75,11 +76,24 @@ public class ${classSpecification.name}FormFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
-                    ${classSpecification.name?uncap_first}.setPrescribed(${classSpecification.name}.NOT_PRESCRIBED);
+                    ${classSpecification.name?uncap_first}.set${field.name?cap_first}(${classSpecification.name}.NOT_PRESCRIBED);
             }
         });
         <#elseif field.type="List">
-        //
+        sp${field.name?cap_first}=view.findViewById(R.id.<@toUnderScore camelCase="${field.name}"/>);
+        adapter${field.name?cap_first}=new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1);
+        adapter${field.name?cap_first}.addAll(Arrays.asList("One","Two","Three"));//TODO: IMPLEMENT THE LIST
+        sp${field.name?cap_first}.setAdapter(adapter${field.name?cap_first});
+        sp${field.name?cap_first}.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ${classSpecification.name?uncap_first}.set${field.name?cap_first}(adapter${field.name?cap_first}.getItem(position));
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         <#else>
         txt${field.name?cap_first}=(TextInputEditText) view.findViewById(R.id.<@toUnderScore camelCase="${field.name}"/>);
         </#if>
@@ -100,17 +114,25 @@ public class ${classSpecification.name}FormFragment extends Fragment {
                 //
                 <#list classSpecification.fields as field>
                 <#if field.name != "id">
+                <#if field.type !="boolean" && field.type !="List">
                 String ${field.name?lower_case}=txt${field.name?cap_first}.getText().toString();
+                </#if>
                 </#if>
                 </#list>
                 //save data
-                ${classSpecification.name} ${classSpecification.name?uncap_first}=new ${classSpecification.name}();
                 <#list classSpecification.fields as field>
                 <#if field.name != "id">
+                <#if field.type !="boolean" && field.type !="List">
+                <#if field.type =="int" || field.type=="long">
+                ${classSpecification.name?uncap_first}.set${field.name?cap_first}(Integer.valueOf(${field.name?lower_case}));
+                <#else>
                 ${classSpecification.name?uncap_first}.set${field.name?cap_first}(${field.name?lower_case});
+                </#if>
+                </#if>
                 </#if>
                 </#list>
                 m${classSpecification.name}VM.save(${classSpecification.name?uncap_first});
+                //
                 getActivity().finish();
             }
         });
