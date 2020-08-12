@@ -39,7 +39,7 @@ public class ${classSpecification.name}FormFragment extends Fragment {
 </#if>
 </#list>
     //
-    private ${classSpecification.name} ${classSpecification.name?uncap_first};
+    private ${classSpecification.name} ${classSpecification.name?uncap_first}=new ${classSpecification.name}();
     private ${classSpecification.name}ViewModel m${classSpecification.name}VM;
     //
     public ${classSpecification.name}FormFragment(){
@@ -60,6 +60,13 @@ public class ${classSpecification.name}FormFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_form_${classSpecification.tableName},
                 container,false);
+        long id=getActivity().getIntent().getLongExtra("id",0);
+        if(savedInstanceState==null){
+            savedInstanceState=new Bundle();
+        }
+        savedInstanceState.putLong("id",id);
+        onSaveInstanceState(savedInstanceState);
+        //
         <#list classSpecification.fields as field>
         <#if field.name != "id">
         <#if field.type =="boolean">
@@ -68,7 +75,7 @@ public class ${classSpecification.name}FormFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
-                    ${classSpecification.name?uncap_first}.set${field.name?cap_first}(${classSpecification.name}.PRESCRIBED);
+                    ${classSpecification.name?uncap_first}.set${field.name?cap_first}(${classSpecification.name}.${field.name?upper_case});
             }
         });
         rbNot${field.name?cap_first}=view.findViewById(R.id.not_<@toUnderScore camelCase="${field.name}"/>);
@@ -76,7 +83,7 @@ public class ${classSpecification.name}FormFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
-                    ${classSpecification.name?uncap_first}.set${field.name?cap_first}(${classSpecification.name}.NOT_PRESCRIBED);
+                    ${classSpecification.name?uncap_first}.set${field.name?cap_first}(${classSpecification.name}.NOT_${field.name?upper_case});
             }
         });
         <#elseif field.type="List">
@@ -142,5 +149,38 @@ public class ${classSpecification.name}FormFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         m${classSpecification.name}VM=new ViewModelProvider(this).get(${classSpecification.name}ViewModel.class);
+        m${classSpecification.name}VM.init(savedInstanceState.getLong("id"));
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        m${classSpecification.name}VM.get().observe(getViewLifecycleOwner(), new Observer<${classSpecification.name}>() {
+            @Override
+            public void onChanged(${classSpecification.name} ${classSpecification.name?uncap_first}) {
+                setFormData(${classSpecification.name?uncap_first});
+            }
+        });
+    }
+    protected void setFormData(${classSpecification.name} medicationHistory){
+        if(${classSpecification.name?uncap_first} instanceof ${classSpecification.name}){
+            this.${classSpecification.name?uncap_first}=${classSpecification.name?uncap_first};
+            //
+            <#list classSpecification.fields as field>
+            <#if field.name != "id">
+            <#if field.type =="boolean">
+            //setup boolean type
+            rb${field.name?cap_first}.setChecked(this.${classSpecification.name?uncap_first}.is${field.name?cap_first}());
+            rbNot${field.name?cap_first}.setChecked(!this.${classSpecification.name?uncap_first}.is${field.name?cap_first}());
+            <#elseif field.type =="List">
+            //setup list type
+            sp${field.name?cap_first}.setSelection(adapterDrugs.getPosition(this.${classSpecification.name?uncap_first}.get${field.name?cap_first}()));
+            <#elseif field.type =="int" || field.type=="long">
+            txt${field.name?cap_first}.setText(Integer.valueOf(this.${classSpecification.name?uncap_first}.get${field.name?cap_first}()));
+            <#else>
+            txt${field.name?cap_first}.setText(this.${classSpecification.name?uncap_first}.get${field.name?cap_first}());
+            </#if>
+            </#if>
+            </#list>
+        }
     }
 }
