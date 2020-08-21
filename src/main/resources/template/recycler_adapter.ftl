@@ -42,7 +42,11 @@ public class ${classSpecification.name}RecyclerViewAdapter extends RecyclerView.
                 ItemViewHolder item=(ItemViewHolder) holder;
                 <#list classSpecification.fields as field>
                 <#if field.name != "id">
+                <#if field.type =="long">
+                item.txt${field.name?cap_first}.setText(Long.valueOf(items.get(position).get${field.name?cap_first}()).toString());
+                <#else>
                 item.txt${field.name?cap_first}.setText(items.get(position).get${field.name?cap_first}());
+                </#if>
                 </#if>
                 </#list>
                 //item.txtDate.setText(items.get(position).getRequestedDate().format(DateTimeFormatter.ofPattern(Config.DEFAULT_DATE_FORMAT)));
