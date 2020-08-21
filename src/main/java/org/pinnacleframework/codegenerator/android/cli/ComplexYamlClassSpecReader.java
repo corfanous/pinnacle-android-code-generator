@@ -40,7 +40,7 @@ public class ComplexYamlClassSpecReader {
             imports=
                     new ArrayList<>((Collection<? extends String>) e.getValue().get("imports"));
         }catch (Exception ex){
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
         return new ComplexClassSpecification(e.getKey(),fields, imports,
                                                  e.getValue().get("basePackageName").toString(),
