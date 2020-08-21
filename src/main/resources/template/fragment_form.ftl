@@ -108,7 +108,7 @@ public class ${classSpecification.name}FormFragment extends Fragment {
             }
         });
         <#else>
-        txt${field.name?cap_first}=(TextInputEditText) view.findViewById(R.id.<@toUnderScore camelCase="${field.name}"/>);
+        txt${field.name?cap_first}=view.findViewById(R.id.<@toUnderScore camelCase="${field.name}"/>);
         </#if>
         </#if>
         </#list>
