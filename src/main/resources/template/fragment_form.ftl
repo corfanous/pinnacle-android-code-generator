@@ -181,8 +181,10 @@ public class ${classSpecification.name}FormFragment extends Fragment {
             <#elseif field.type =="List">
             //setup list type
             sp${field.name?cap_first}.setSelection(adapterDrugs.getPosition(this.${classSpecification.name?uncap_first}.get${field.name?cap_first}()));
-            <#elseif field.type =="int" || field.type=="long">
-            txt${field.name?cap_first}.setText(Integer.valueOf(this.${classSpecification.name?uncap_first}.get${field.name?cap_first}()));
+            <#elseif field.type =="int">
+            txt${field.name?cap_first}.setText(Integer.valueOf(this.${classSpecification.name?uncap_first}.get${field.name?cap_first}()).toString());
+            <#elseif field.type=="long">
+            txt${field.name?cap_first}.setText(Long.valueOf(this.${classSpecification.name?uncap_first}.get${field.name?cap_first}()).toString());
             <#else>
             txt${field.name?cap_first}.setText(this.${classSpecification.name?uncap_first}.get${field.name?cap_first}());
             </#if>
