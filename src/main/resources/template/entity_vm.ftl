@@ -10,7 +10,7 @@ import java.util.List;
 public class ${classSpecification.name}ViewModel extends AndroidViewModel{
 
     private LiveData<List<${classSpecification.name}>> m${classSpecification.name}s;
-    private LiveData<<${classSpecification.name}> m${classSpecification.name};
+    private LiveData<${classSpecification.name}> m${classSpecification.name};
     private ${classSpecification.name}Repo ${classSpecification.name?uncap_first}Repo;
 
     public ${classSpecification.name}ViewModel(@NonNull Application application) {
